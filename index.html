@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+	<title>Melhor Amigo - Pet Shop &amp; Clínica Veterinária</title>
+    <style>
+
+        /* =====================================================
+           RESET
+           ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           PÁGINA
+           ===================================================== */
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: #ffffff;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           APLICATIVO
+           ===================================================== */
+
+        #app {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            background: #ffffff;
+        }
+
+
+        /* =====================================================
+           TELAS
+           ===================================================== */
+
+        .tela {
+            position: relative;
+
+            display: none;
+
+            width: 100%;
+            min-height: 100vh;
+
+            justify-content: center;
+            align-items: flex-start;
+
+            background: #ffffff;
+        }
+
+        .tela.ativa {
+            display: flex;
+        }
+
+
+        /* =====================================================
+           CELULAR
+           ===================================================== */
+
+        .celular {
+            position: relative;
+
+            width: min(100vw, 366px);
+            height: min(100vh, 619px);
+        }
+
+
+        /* =====================================================
+           IMAGENS
+           ===================================================== */
+
+        .celular > img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           BOTÕES INVISÍVEIS
+           ===================================================== */
+
+        .botao {
+            position: absolute;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            z-index: 100;
+        }
+
+
+        /* =====================================================
+           LOGIN
+           ===================================================== */
+
+        .login-email {
+            position: absolute;
+
+            left: 12%;
+            top: 36.5%;
+
+            width: 76%;
+            height: 6.5%;
+
+            border: none;
+            outline: none;
+
+            background: #ffffff;
+
+            border-radius: 10px;
+
+            padding: 0 42px;
+
+            color: #123B70;
+
+            font-size: 13px;
+
+            z-index: 50;
+        }
+
+
+        .login-senha {
+            position: absolute;
+
+            left: 12%;
+            top: 44%;
+
+            width: 76%;
+            height: 6.5%;
+
+            border: none;
+            outline: none;
+
+            background: #ffffff;
+
+            border-radius: 10px;
+
+            padding: 0 42px;
+
+            color: #123B70;
+
+            font-size: 13px;
+
+            z-index: 50;
+        }
+
+
+        .login-email::placeholder,
+        .login-senha::placeholder {
+            color: #64748B;
+            opacity: 1;
+        }
+
+
+        /* BOTÃO ENTRAR */
+
+        .botao-entrar {
+            left: 12%;
+            top: 51.5%;
+
+            width: 76%;
+            height: 7%;
+        }
+
+
+        /* GOOGLE */
+
+        .botao-google {
+            left: 19%;
+            top: 62%;
+
+            width: 19%;
+            height: 7%;
+        }
+
+
+        /* APPLE */
+
+        .botao-apple {
+            left: 40.5%;
+            top: 62%;
+
+            width: 19%;
+            height: 7%;
+        }
+
+
+        /* WHATSAPP */
+
+        .botao-whatsapp {
+            left: 62%;
+            top: 62%;
+
+            width: 19%;
+            height: 7%;
+        }
+
+
+        /* CADASTRE-SE */
+
+        .botao-cadastro {
+            left: 28%;
+            top: 76%;
+
+            width: 44%;
+            height: 7%;
+        }
+
+
+        /* =====================================================
+           CADASTRO DO TUTOR
+           ===================================================== */
+
+        .campo-tutor {
+            position: absolute;
+
+            left: 12%;
+
+            width: 76%;
+            height: 5.2%;
+
+            border: none;
+            outline: none;
+
+            background: #ffffff;
+
+            border-radius: 10px;
+
+            padding: 0 42px;
+
+            color: #123B70;
+
+            font-size: 13px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            z-index: 50;
+        }
+
+
+        .campo-tutor::placeholder {
+            color: #64748B;
+            opacity: 1;
+        }
+
+
+        .campo-nome {
+            top: 21.2%;
+        }
+
+
+        .campo-email {
+            top: 27.7%;
+        }
+
+
+        .campo-telefone {
+            top: 34.2%;
+        }
+
+
+        .campo-cpf {
+            top: 40.7%;
+        }
+
+
+        .campo-senha {
+            top: 47.2%;
+        }
+
+
+        .campo-confirmar {
+            top: 53.7%;
+        }
+
+
+        /* BOTÃO CADASTRAR */
+
+        .botao-cadastrar {
+            left: 13%;
+            top: 59%;
+
+            width: 74%;
+            height: 7%;
+        }
+
+
+        /* VOLTAR PARA LOGIN */
+
+        .botao-voltar-login {
+            left: 51%;
+            top: 68%;
+
+            width: 30%;
+            height: 6%;
+        }
+
+
+        /* =====================================================
+           OLHOS DAS SENHAS
+           ===================================================== */
+
+        .olho-senha {
+            position: absolute;
+
+            right: 13%;
+
+            width: 9%;
+            height: 5%;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            z-index: 100;
+        }
+
+
+        .olho-senha-1 {
+            top: 47.2%;
+        }
+
+
+        .olho-senha-2 {
+            top: 53.7%;
+        }
+
+
+        /* =====================================================
+           TELA INICIAL
+           ===================================================== */
+
+        .botao-meus-pets {
+            left: 13%;
+            top: 28%;
+
+            width: 74%;
+            height: 9%;
+        }
+
+
+        .botao-agendar {
+            left: 12%;
+            top: 53%;
+
+            width: 25%;
+            height: 9%;
+        }
+
+
+        .botao-vacinas {
+            left: 38%;
+            top: 53%;
+
+            width: 24%;
+            height: 9%;
+        }
+
+
+        .botao-prontuario {
+            left: 64%;
+            top: 53%;
+
+            width: 24%;
+            height: 9%;
+        }
+
+
+        .botao-banho {
+            left: 12%;
+            top: 65%;
+
+            width: 25%;
+            height: 9%;
+        }
+
+
+        .botao-equipe {
+            left: 38%;
+            top: 65%;
+
+            width: 24%;
+            height: 9%;
+        }
+
+
+        .botao-pacotes {
+            left: 64%;
+            top: 65%;
+
+            width: 24%;
+            height: 9%;
+        }
+
+
+        /* =====================================================
+           MEUS PETS
+           ===================================================== */
+
+        .botao-voltar-pets {
+            left: 5%;
+            top: 5%;
+
+            width: 18%;
+            height: 8%;
+        }
+
+
+        /* =====================================================
+           RESPONSIVIDADE
+           ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .celular {
+                width: 100vw;
+                height: 100vh;
+            }
+
+            .celular > img {
+                width: 100%;
+                height: 100%;
+
+                object-fit: contain;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main id="app">
+
+
+    <!-- =====================================================
+         01 - SPLASH
+         ===================================================== -->
+
+    <section
+        id="splash"
+        class="tela ativa">
+
+        <div class="celular">
+
+            <img
+                src="imagens/01_splash.png"
+                alt="Melhor Amigo">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         02 - LOGIN
+         ===================================================== -->
+
+    <section
+        id="login"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/02_login.png"
+                alt="Login Melhor Amigo">
+
+
+            <input
+                id="loginEmail"
+                class="login-email"
+                type="email"
+                placeholder="E-mail ou usuário">
+
+
+            <input
+                id="loginSenha"
+                class="login-senha"
+                type="password"
+                placeholder="Senha">
+
+
+            <button
+                class="botao botao-entrar"
+                type="button"
+                onclick="entrarComEmail()">
+            </button>
+
+
+            <button
+                class="botao botao-google"
+                type="button"
+                onclick="loginGoogle()">
+            </button>
+
+
+            <button
+                class="botao botao-apple"
+                type="button"
+                onclick="loginApple()">
+            </button>
+
+
+            <button
+                class="botao botao-whatsapp"
+                type="button"
+                onclick="loginWhatsApp()">
+            </button>
+
+
+            <button
+                class="botao botao-cadastro"
+                type="button"
+                onclick="abrirCadastro()">
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         03 - CADASTRO DO TUTOR
+         ===================================================== -->
+
+    <section
+        id="cadastro"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/03_cadastro_tutor.png"
+                alt="Cadastro do tutor">
+
+
+            <input
+                id="nomeTutor"
+                class="campo-tutor campo-nome"
+                type="text"
+                placeholder="Nome completo">
+
+
+            <input
+                id="emailTutor"
+                class="campo-tutor campo-email"
+                type="email"
+                placeholder="E-mail">
+
+
+            <input
+                id="telefoneTutor"
+                class="campo-tutor campo-telefone"
+                type="tel"
+                placeholder="Telefone/WhatsApp">
+
+
+            <input
+                id="cpfTutor"
+                class="campo-tutor campo-cpf"
+                type="text"
+                placeholder="CPF">
+
+
+            <input
+                id="senhaTutor"
+                class="campo-tutor campo-senha"
+                type="password"
+                placeholder="Senha">
+
+
+            <button
+                class="olho-senha olho-senha-1"
+                type="button"
+                onclick="mostrarSenha('senhaTutor')">
+            </button>
+
+
+            <input
+                id="confirmarSenhaTutor"
+                class="campo-tutor campo-confirmar"
+                type="password"
+                placeholder="Confirmar senha">
+
+
+            <button
+                class="olho-senha olho-senha-2"
+                type="button"
+                onclick="mostrarSenha('confirmarSenhaTutor')">
+            </button>
+
+
+            <button
+                class="botao botao-cadastrar"
+                type="button"
+                onclick="cadastrarTutor()">
+            </button>
+
+
+            <button
+                class="botao botao-voltar-login"
+                type="button"
+                onclick="abrirLogin()">
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         04 - TELA INICIAL
+         ===================================================== -->
+
+    <section
+        id="inicio"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/04_tela_inicial.png"
+                alt="Tela inicial">
+
+
+            <button
+                class="botao botao-meus-pets"
+                type="button"
+                onclick="abrirMeusPets()">
+            </button>
+
+
+            <button
+                class="botao botao-agendar"
+                type="button"
+                onclick="abrirAgenda()">
+            </button>
+
+
+            <button
+                class="botao botao-vacinas"
+                type="button"
+                onclick="abrirVacinas()">
+            </button>
+
+
+            <button
+                class="botao botao-prontuario"
+                type="button"
+                onclick="abrirProntuario()">
+            </button>
+
+
+            <button
+                class="botao botao-banho"
+                type="button"
+                onclick="abrirBanhoTosa()">
+            </button>
+
+
+            <button
+                class="botao botao-equipe"
+                type="button"
+                onclick="abrirEquipe()">
+            </button>
+
+
+            <button
+                class="botao botao-pacotes"
+                type="button"
+                onclick="abrirPacotes()">
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         05 - MEUS PETS
+         ===================================================== -->
+
+    <section
+    id="meusPets"
+    class="tela">
+
+    <div class="celular">
+
+        <img
+            src="imagens/05_meus_pets.png"
+            alt="Meus Pets">
+
+
+        <!-- VOLTAR -->
+        <button
+            class="botao botao-voltar-pets"
+            type="button"
+            onclick="abrirInicio()"
+            aria-label="Voltar">
+        </button>
+
+
+        <!-- CADASTRAR NOVO PET -->
+        <button
+            class="botao botao-cadastrar-pet"
+            type="button"
+            onclick="abrirCadastroPet()"
+            aria-label="Cadastrar novo pet">
+        </button>
+
+    </div>
+
+</section>
+
+
+    <!-- =====================================================
+         06 - CADASTRO DO PET
+         ===================================================== -->
+
+    <section
+        id="cadastroPet"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/06_cadastro_pet.png"
+                alt="Cadastro do pet">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         07 - FICHA DO PET
+         ===================================================== -->
+
+    <section
+        id="fichaPet"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/07_ficha_pet.png"
+                alt="Ficha do pet">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         08 - DADOS GERAIS
+         ===================================================== -->
+
+    <section
+        id="dadosGerais"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/08_dados_gerais.png"
+                alt="Dados gerais">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         09 - VACINAS
+         ===================================================== -->
+
+    <section
+        id="vacinas"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/09_vacinas.png"
+                alt="Vacinas">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         10 - BANHO E TOSA
+         ===================================================== -->
+
+    <section
+        id="banhoTosa"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/10_banho_e_tosa.png"
+                alt="Banho e Tosa">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         11 - CONSULTAS
+         ===================================================== -->
+
+    <section
+        id="consultas"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/11_consultas.png"
+                alt="Consultas">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         12 - NOSSA EQUIPE
+         ===================================================== -->
+
+    <section
+        id="equipe"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/12_nossa_equipe.png"
+                alt="Nossa equipe">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         13 - AGENDA
+         ===================================================== -->
+
+    <section
+        id="agenda"
+        class="tela">
+
+        <div class="celular">
+
+            <img
+                src="imagens/13_agenda.png"
+                alt="Agenda">
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     JAVASCRIPT EXTERNO
+     ===================================================== -->
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>

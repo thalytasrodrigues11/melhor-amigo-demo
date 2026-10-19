@@ -1,0 +1,116 @@
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   PÁGINA
+   ========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   APLICATIVO
+   ========================================= */
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   TODAS AS TELAS
+   ========================================= */
+
+.tela {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   IMAGENS DAS TELAS
+   ========================================= */
+
+.tela img {
+    display: block;
+
+    width: auto;
+    height: 100vh;
+
+    max-width: 100%;
+
+    object-fit: contain;
+}
+
+/* =========================================
+   BOTÃO MEUS PETS
+   ========================================= */
+
+.tela {
+    position: relative;
+}
+
+.botao-meus-pets {
+    position: absolute;
+
+    left: 22%;
+    top: 30%;
+
+    width: 56%;
+    height: 8%;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 100;
+}
+/* =========================================
+   CELULAR / TELAS MENORES
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .tela img {
+        width: 100%;
+        height: auto;
+
+        max-height: 100vh;
+
+        object-fit: contain;
+    }
+
+}
